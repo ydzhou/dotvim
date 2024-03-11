@@ -1,11 +1,14 @@
 call plug#begin()
 " Bundles
-" Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'prabirshrestha/asyncomplete-buffer.vim'
 Plug 'tomtom/tcomment_vim'
 Plug 'jiangmiao/auto-pairs'
-Plug 'justinmk/vim-dirvish'
 Plug 'ydzhou/simple-statusline.vim'
 " Colorscheme
 Plug 'ydzhou/monocolor.vim'
@@ -46,9 +49,9 @@ if has("gui_running")
     if has("mac")
         set guioptions-=m
         set guioptions-=r
-        set guifont=Menlo:h16
+        set guifont=Menlo:h14
     else
-        set guifont=monospace\ 12
+        set guifont=\ 12
     endif
 	set guioptions-=T
 	set guioptions-=e
@@ -56,7 +59,7 @@ if has("gui_running")
 	set lines=50
 	set columns=150
 	set linespace=2
-	colorscheme monocolor
+	colorscheme PaperColor
     autocmd InsertEnter,InsertLeave * set cul!
 else
     let &t_SI = "\e[6 q"
@@ -97,6 +100,7 @@ nnoremap x "_x
 xnoremap x "_x
 nnoremap s "_s
 xnoremap s "_s
+map <C-n> :Explore<CR>
 
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
@@ -106,7 +110,7 @@ autocmd WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&buftype"
 """"""""""""""""""""""""""
 "" PLUGINS
 
-source ~/dotvim/vim/configs/dirvish.vim
+source ~/dotvim/vim/configs/lsp.vim
 source ~/dotvim/vim/configs/fzf.vim
 
 " TComment
