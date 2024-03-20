@@ -9,18 +9,17 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'prabirshrestha/asyncomplete-buffer.vim'
 Plug 'tomtom/tcomment_vim'
 Plug 'jiangmiao/auto-pairs'
-Plug 'ydzhou/simple-statusline.vim'
+Plug 'airblade/vim-rooter'
 " Colorscheme
 Plug 'ydzhou/monocolor.vim'
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'sainnhe/everforest'
 call plug#end()
 
 set nocompatible
 set mouse=a
 set backspace=indent,eol,start
-set gcr=a:blinkon0
 set autoread
+set gcr=a:blinkon0
 set noeb vb t_vb=
 if has('autocmd')
 	autocmd GUIEnter * set visualbell t_vb=
@@ -42,14 +41,15 @@ set clipboard+=unnamed
 set number signcolumn=number
 
 " set ruler
-set laststatus=2 statusline=%!SimStatusline()
+set laststatus=2
+set statusline=%03l,%03v\ %p%%\ %<%=%F%m%r%h%w
 
 syntax on
 if has("gui_running")
     if has("mac")
         set guioptions-=m
         set guioptions-=r
-        set guifont=Menlo:h14
+        set guifont=Source\ Code\ Pro:h14
     else
         set guifont=\ 12
     endif
