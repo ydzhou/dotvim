@@ -1,19 +1,17 @@
-call plug#begin()
-" Bundles
+vim9script
+
+plug#begin()
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'mattn/vim-lsp-settings'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'prabirshrestha/asyncomplete-buffer.vim'
 Plug 'tomtom/tcomment_vim'
 Plug 'jiangmiao/auto-pairs'
+Plug 'girishji/vimcomplete'
 Plug 'airblade/vim-rooter'
-" Colorscheme
+Plug 'yegappan/lsp'
+# Colorscheme
 Plug 'ydzhou/monocolor.vim'
 Plug 'NLKNguyen/papercolor-theme'
-call plug#end()
+plug#end()
 
 set nocompatible
 set mouse=a
@@ -26,6 +24,7 @@ if has('autocmd')
 endif
 set encoding=UTF-8
 set wildmenu
+set wildmode=longest:full,full
 set nofoldenable
 
 filetype on
@@ -40,7 +39,6 @@ set cindent autoindent
 set clipboard+=unnamed
 set number signcolumn=number
 
-" set ruler
 set laststatus=2
 set statusline=%03l,%03v\ %p%%\ %<%=%F%m%r%h%w
 
@@ -62,38 +60,36 @@ if has("gui_running")
 	colorscheme PaperColor
     autocmd InsertEnter,InsertLeave * set cul!
 else
-    let &t_SI = "\e[6 q"
-    let &t_EI = "\e[2 q"
-    " Fix Kitty issue with vim colorscheme background
-    let &t_ut = ''
+    &t_SI = "\e[6 q"
+    &t_EI = "\e[2 q"
+    # Fix Kitty issue with vim colorscheme background
+    &t_ut = ''
     set t_Co=256
-    set background=dark
-    colorscheme everforest
 endif
 
 set incsearch ignorecase smartcase
 
-""Backup
+# Backup
 set noswapfile
 set backupdir=~/.vim/backup
 
-let mapleader=","
+g:mapleader = ","
 map ; <C-d>
 map ' <C-u>
 map <silent> <Leader>, <C-o>
 map <silent> <Leader>. <C-i>
-" Disable mouse double clicking for accidentally switching to visual mode
+# Disable mouse double clicking for accidentally switching to visual mode
 map <2-LeftMouse> <Nop>
-" standard keys for wrapped lines
+# standard keys for wrapped lines
 set whichwrap+=<,>,[,]
 nnoremap j gj
 nnoremap k gk
 vnoremap j gj
 vnoremap k gk
-"" easier moving of code block
+# easier moving of code block
 vnoremap < <gv
 vnoremap > >gv
-" Paste from 0 register to avoid cannot paste after deletion
+# Paste from 0 register to avoid cannot paste after deletion
 nnoremap d "_d
 xnoremap d "_d
 nnoremap x "_x
@@ -104,15 +100,15 @@ map <C-n> :Explore<CR>
 
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
-" Quickfix window auto close when closing a window
+# Quickfix window auto close when closing a window
 autocmd WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&buftype") == "quickfix"|q|endif
 
-""""""""""""""""""""""""""
-"" PLUGINS
+g:netrw_liststyle = 3
 
-source ~/dotvim/vim/configs/lsp.vim
 source ~/dotvim/vim/configs/fzf.vim
+source ~/dotvim/vim/configs/lsp.vim
+source ~/dotvim/vim/configs/cmp.vim
 
-" TComment
-"let g:tcommentOptions = {'whitespace' : 'no'}
+# TComment
+# g:tcommentOptions = {'whitespace' : 'no'}
 map <silent> <Leader>c :TComment<CR>
