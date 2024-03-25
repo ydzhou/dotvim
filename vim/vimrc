@@ -5,12 +5,12 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'tomtom/tcomment_vim'
 Plug 'jiangmiao/auto-pairs'
-Plug 'girishji/vimcomplete'
 Plug 'airblade/vim-rooter'
 Plug 'yegappan/lsp'
 # Colorscheme
 Plug 'ydzhou/monocolor.vim'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'morhetz/gruvbox'
 plug#end()
 
 set nocompatible
@@ -40,14 +40,14 @@ set clipboard+=unnamed
 set number signcolumn=number
 
 set laststatus=2
-set statusline=%03l,%03v\ %p%%\ %<%=%F%m%r%h%w
+set statusline=%03l,%03v\ %p%%\ %<%=[%{&filetype}]%F%m%r%h%w
 
 syntax on
 if has("gui_running")
     if has("mac")
         set guioptions-=m
         set guioptions-=r
-        set guifont=Source\ Code\ Pro:h14
+        set guifont=Anonymous\ Pro:h14
     else
         set guifont=\ 12
     endif
@@ -57,7 +57,8 @@ if has("gui_running")
 	set lines=50
 	set columns=150
 	set linespace=2
-	colorscheme PaperColor
+    set background=dark
+	colorscheme gruvbox 
     autocmd InsertEnter,InsertLeave * set cul!
 else
     &t_SI = "\e[6 q"
@@ -65,6 +66,7 @@ else
     # Fix Kitty issue with vim colorscheme background
     &t_ut = ''
     set t_Co=256
+    colorscheme gruvbox
 endif
 
 set incsearch ignorecase smartcase
