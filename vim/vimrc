@@ -1,16 +1,17 @@
 vim9script
 
 plug#begin()
+Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'tomtom/tcomment_vim'
-Plug 'jiangmiao/auto-pairs'
-Plug 'airblade/vim-rooter'
 Plug 'yegappan/lsp'
+Plug 'preservim/nerdtree'
+Plug 'tomtom/tcomment_vim'
+Plug 'ryanoasis/vim-devicons'
+Plug 'airblade/vim-rooter'
 # Colorscheme
 Plug 'ydzhou/monocolor.vim'
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'morhetz/gruvbox'
 plug#end()
 
 set nocompatible
@@ -58,15 +59,17 @@ if has("gui_running")
 	set columns=150
 	set linespace=2
     set background=dark
-	colorscheme gruvbox 
+	colorscheme far 
     autocmd InsertEnter,InsertLeave * set cul!
 else
+    set termguicolors
+    # set t_Co=256
     &t_SI = "\e[6 q"
     &t_EI = "\e[2 q"
     # Fix Kitty issue with vim colorscheme background
     &t_ut = ''
-    set t_Co=256
-    colorscheme gruvbox
+    set background=dark
+    colorscheme far
 endif
 
 set incsearch ignorecase smartcase
@@ -98,19 +101,22 @@ nnoremap x "_x
 xnoremap x "_x
 nnoremap s "_s
 xnoremap s "_s
-map <C-n> :Explore<CR>
 
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 # Quickfix window auto close when closing a window
 autocmd WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&buftype") == "quickfix"|q|endif
 
-g:netrw_liststyle = 3
+# NERDTree
+map <silent> <C-n> :NERDTreeToggle<CR>
 
+g:NERDTreeMouseMode = 3
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+# TComment
+map <silent> <Leader>c :TComment<CR>
+
+# Additional Setup
 source ~/dotvim/vim/configs/fzf.vim
 source ~/dotvim/vim/configs/lsp.vim
 source ~/dotvim/vim/configs/cmp.vim
-
-# TComment
-# g:tcommentOptions = {'whitespace' : 'no'}
-map <silent> <Leader>c :TComment<CR>
