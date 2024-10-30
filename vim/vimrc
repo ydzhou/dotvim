@@ -48,9 +48,9 @@ if has("gui_running")
     if has("mac")
         set guioptions-=m
         set guioptions-=r
-        set guifont=Anonymous\ Pro:h14
+        set guifont=monospaced:h14
     else
-        set guifont=\ 12
+        set guifont=Dejavu\ Sans\ Mono\ 12
     endif
 	set guioptions-=T
 	set guioptions-=e
@@ -68,7 +68,7 @@ else
     # Fix Kitty issue with vim colorscheme background
     &t_ut = ''
     set background=dark
-    colorscheme far
+    colorscheme PaperColor
 endif
 
 set incsearch ignorecase smartcase

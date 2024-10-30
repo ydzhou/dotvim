@@ -37,6 +37,12 @@ var lspServers = [
             }
         }
     },
+    {
+        name: 'clangd',
+        filetype: ['c', 'cpp'],
+        path: 'clangd',
+        args: ['--background-index']
+    },
 ]
 autocmd User LspSetup call LspAddServer(lspServers)
 
